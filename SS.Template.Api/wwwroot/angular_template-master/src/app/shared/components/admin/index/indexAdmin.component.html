@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="container-fluid">
+        <app-navbaradmin></app-navbaradmin>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block" style="background-color: white;">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column list-group list-group-flush">
+                    <li class="nav-item list-group-item">
+                        <a class="nav-link" style="font-size: 20px;" href="javascript:void(0);" (click)="listAll()">
+                            <i class="fas fa-list-alt"></i> View all <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item list-group-item" *ngFor="let c of categoriesList">
+                        <a class="nav-link" href="javascript:void(0);" (click)="filterByCategory($event)">
+                            {{c}} <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="version">
+                    <app-version></app-version>
+                </div>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h3 class="animate__animated animate__fadeIn">Products</h3>
+            <hr>
+            <div class="navbar-nav col-md-5 ">
+                <form class="d-flex" (submit)="onSearchForProduct()">
+                    <div class="form-group">
+                        <input class="form-control me-2" type="search" placeholder="Search" style="width: 500px;" aria-label="Search" name="search" #search="ngModel" [(ngModel)]="searchBar" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-outline-success ml-2" type="submit">Search</button>
+                    </div>
+                </form>
+                <h3 class="mt-5" *ngIf="isProductsEmpty">Cannot find search results <i class="fas fa-sad-tear"></i>
+                    <hr>
+                </h3>
+            </div>
+            <div class="col-md-2 ml-auto">
+                <button class="btn btn-success btn-style-se" [routerLink]="['/addProduct']"><i class="fas fa-plus-circle"></i> Add product</button>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-3 d-flex align-items-stretch" *ngFor="let p of products">
+                    <div class="card mt-5 animate__animated animate__pulse" style="width: 18rem; border: none;">
+                        <img class="card-img-top card-img m-2" src="{{p.productImg}}" title="{{p.productName}}" width="200" height="200" style="object-fit: cover;" alt="{{p.productName}}">
+                        <div class="card-block d-flex flex-column">
+                            <h5 class="card-title text-title">{{p.productName}}</h5>
+                            <p class="card-text text-justify text-description">{{p.productDescription}}</p>
+                            <div class="row">
+                                <div class="col-md-6 mr-auto m-0">
+                                    <button class="btn btn-danger btn-style-se" (click)="onDeleteProduct(p.id)"> <i class="fas fa-trash"></i> Delete</button>
+                                </div>
+                                <div class="col-md-6 ml-auto m-0">
+                                    <button routerLink='/modifyProduct/{{p.id}}' class="btn btn-primary btn-style-se"><i class="fas fa-edit"></i> Modify</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>
+<!------------FOOTER------------>
+<app-footer></app-footer>

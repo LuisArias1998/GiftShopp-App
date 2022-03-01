@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5Vnym+3J3RH7g91XcIAmuHr2xlvQFWf8oW+J7OPSl09/b7Sj3G9wFSEAZJJm2ruR+puGqiMQekYRHBo22IMAaQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\larias\\Documents\\GiftShop\\SS.Template.Core\\SS.Template.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\larias\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

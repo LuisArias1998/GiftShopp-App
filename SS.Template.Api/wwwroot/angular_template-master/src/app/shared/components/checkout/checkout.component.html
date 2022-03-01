@@ -1,0 +1,53 @@
+<div class="card mt-5">
+    <div class="card-body">
+        <h4 class="card-title text-center">Checkout</h4>
+        <form (submit)="onCheckout()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="First Name" name="FirstName" #FirstName="ngModel" [(ngModel)]="creds.FirstName" required />
+                        <span *ngIf="FirstName.touched && FirstName.invalid && FirstName.errors.required" class="text-danger">Required</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Last Name" name="LastName" #LastName="ngModel" [(ngModel)]="creds.LastName" required />
+                        <span *ngIf="LastName.touched && LastName.invalid && LastName.errors.required" class="text-danger">Required</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Street address" name="calle" #calle="ngModel" [(ngModel)]="creds.street" required />
+                        <span *ngIf="calle.touched && calle.invalid && calle.errors.required" class="text-danger">Required</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="City" name="city" #city="ngModel" [(ngModel)]="creds.city" required />
+                        <span *ngIf="city.touched && city.invalid && city.errors.required" class="text-danger">Required</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Region" name="region" #region="ngModel" [(ngModel)]="creds.region" required />
+                <span *ngIf="region.touched && region.invalid && region.errors.required" class="text-danger">Required</span>
+            </div>
+            <div class="form-group">
+                <input type="number" pattern="[0-9]{5}" onKeyPress="if(this.value.length==5) return false;" class="form-control" placeholder="ZIP Code" name="zipCode" #zipCode="ngModel" [(ngModel)]="creds.zipCode" required />
+                <span *ngIf="zipCode.touched && zipCode.invalid && zipCode.errors.required" class="text-danger">Required</span>
+            </div>
+            <div class="form-group">
+                <input type="tel" pattern="[0-9]{10}" onKeyPress="if(this.value.length==10) return true;" class="form-control" placeholder="Telephone" name="telephone" #telephone="ngModel" maxlength="10" [(ngModel)]="creds.telephone" required />
+                <span *ngIf="telephone.touched && telephone.invalid && telephone.errors.required" class="text-danger">Required</span>
+            </div>
+
+            <div class="form-group">
+                <div class="row justify-content-center m-0 mt-5">
+                    <input type="submit" class="btn btn-color" value="Checkout" [disabled]="calle.invalid || city.invalid || region.invalid || zipCode.invalid || telephone.invalid" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

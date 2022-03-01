@@ -1,0 +1,76 @@
+<!-------------NAVBAR-------------->
+<div class="row">
+    <div class="container-fluid">
+        <app-navbar [(isLogged)]="isLogged"></app-navbar>
+    </div>
+</div>
+<!---------------TABLE-------------->
+<div class="container-fluid mb-5 mt-5">
+    <div class="row justify-content-center m-0 animate__animated animate__fadeIn">
+        <h3 class="mt-5">Cart products</h3>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-8 mr-auto ml-auto">
+            <table class="table mt-5">
+                <thead class="" style="background-color: #d041c1; color:white">
+                    <tr>
+                        <th class="col-3"></th>
+                        <th class="col-3">Product</th>
+                        <th class="col-2">Price</th>
+                        <th class="col-2">Quantity</th>
+                        <th class="col-2">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of cartProducts">
+                        <th class="col-3"><img src="{{c.productImg}}" alt="{{c.productName}}" height="50" width="50"></th>
+                        <td class="col-3">{{c.productName}}</td>
+                        <td class="col-2">{{c.unitPrice | currency}}</td>
+                        <td class="col-2">{{c.quantity}}</td>
+                        <td>{{c.quantity * c.unitPrice | currency}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!---------------TOTAL CARD------------------>
+    <div class="row">
+        <div class="col-md-4 ml-auto">
+            <div class="card mt-5">
+                <div class="card-header text-center header-style">
+                    <strong>Total</strong>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Subtotal:</strong> {{subtotal | currency}}</li>
+                        <li class="list-group-item"><strong>Shipment:</strong>
+                            <div class="form-check">
+                                <input class="form-check-input" (click)="onStandard()" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Standard shipment (2-4 days): {{4.99 | currency}}
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" (click)="onExpress()" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Express shipment (1-2 days) {{6.99 | currency}}
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item"><strong>Shipment:</strong>
+                            <strong>Total:</strong>{{total | currency}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!------------------CHECKOUT CARD---------------->
+        <div class="col-md-4 mr-auto">
+            <app-checkout [(isLogged)]="isLogged" *ngIf="this.cartProducts.length>0"></app-checkout>
+            <h3 class="mt-5 text-center" style="color: #d041c1;" *ngIf="this.cartProducts.length===0">Add something to your cart</h3>
+        </div>
+    </div>
+</div>
+<!-----------------FOOTER------------>
+<app-footer></app-footer>

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.0": {
+      "SS.Template.Domain/1.0.0": {
+        "runtime": {
+          "SS.Template.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SS.Template.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

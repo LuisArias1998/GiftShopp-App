@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="container-fluid">
+        <app-navbaradmin></app-navbaradmin>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 ml-auto mt-5">
+            <h3>Modify product</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 ml-auto  mt-5">
+            <form (submit)="onModifyProduct()">
+                <div class="form-group">
+                    <label for="productName">Product name</label>
+                    <input type="text" class="form-control input-style" name="productName" #productName="ngModel" [(ngModel)]="product.productName" required />
+                    <span *ngIf="productName.touched && productName.invalid && productName.errors.required" class="text-danger">Required</span>
+                    <i class="fas fa-exclamation-circle" style="color: rgb(255, 210, 11);" *ngIf="productName.untouched"></i>
+                    <i class="fas fa-check-circle" style="color: rgb(0, 146, 0);" *ngIf="productName.touched && productName.valid"></i>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Product description</label>
+                    <textarea type="password" rows="4" class="form-control input-style" name="productDescription" #productDescription="ngModel" [(ngModel)]="product.productDescription" required></textarea>
+                    <span *ngIf="productDescription.touched && productDescription.invalid && productDescription.errors.required" class="text-danger">Required</span>
+                    <i class="fas fa-exclamation-circle" style="color: rgb(255, 210, 11);" *ngIf="productDescription.untouched"></i>
+                    <i class="fas fa-check-circle" style="color: rgb(0, 146, 0);" *ngIf="productDescription.touched && productDescription.valid"></i>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="unitPrice">Unit price</label>
+                            <input type="number" class="form-control " name="unitPrice" #unitPrice="ngModel" [(ngModel)]="product.unitPrice" required />
+                            <span *ngIf="unitPrice.touched && unitPrice.invalid && unitPrice.errors.required" class="text-danger">Required</span>
+                            <i class="fas fa-exclamation-circle" style="color: rgb(255, 210, 11);" *ngIf="unitPrice.untouched"></i>
+                            <i class="fas fa-check-circle" style="color: rgb(0, 146, 0);" *ngIf="unitPrice.touched && unitPrice.valid"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" class="form-control " name="category" #category="ngModel" [(ngModel)]="product.category" required />
+                            <span *ngIf="category.touched && category.invalid && category.errors.required" class="text-danger">Required</span>
+                            <i class="fas fa-exclamation-circle" style="color: rgb(255, 210, 11);" *ngIf="category.untouched"></i>
+                            <i class="fas fa-check-circle" style="color: rgb(0, 146, 0);" *ngIf="category.touched && category.valid"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="productImg">Image URL</label>
+                    <input type="text" class="form-control input-style" name="productImg" #productImg="ngModel" [(ngModel)]="product.productImg" required />
+                    <span *ngIf="productImg.touched && productImg.invalid && productImg.errors.required" class="text-danger">Required</span>
+                    <i class="fas fa-exclamation-circle" style="color: rgb(255, 210, 11);" *ngIf="productImg.untouched"></i>
+                    <i class="fas fa-check-circle" style="color: rgb(0, 146, 0);" *ngIf="productImg.touched && productImg.valid"></i>
+                </div>
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-primary btn-style" (click)="onModifyProduct()" [disabled]="productName.invalid || productDescription.invalid || unitPrice.invalid || category.invalid || productImg.invalid">
+                        <i class="fas fa-edit"></i> Modify product
+                    </button>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2 mr-auto mt-5">
+            <div class="card mt-5" style="width: 18rem; border: none;">
+                <img class="card-img-top card-img m-2" *ngIf="product.productImg" src="{{product.productImg}}" style="object-fit: cover; border-radius: 20px;" alt="Card image cap">
+                <div class="card-block d-flex flex-column">
+                    <h5 class="card-title" *ngIf="product.productName">{{product.productName}}</h5>
+                    <p class="card-text text-justify" *ngIf="product.productDescription">{{product.productDescription}}</p>
+                    <small class="ml-2" style="color: #41a9d0;" *ngIf="product.unitPrice"><strong>{{product.unitPrice | currency}}</strong></small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

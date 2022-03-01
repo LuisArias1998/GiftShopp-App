@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-body">
+    <div class="container-fluid">
+        <a href="" [routerLink]="['/index']"><img class="animate__animated animate__bounceInLeft" src="../../assets/img/logoV3.png" alt="" width="auto" height="80"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav col-md-2 ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/index']" aria-current="page" style="font-size: 25px;" href="#"> <i class="fas fa-store" style="color: #41a9d0;"></i> Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " [routerLink]="['/ordersHistory']" aria-current="page" style="font-size: 25px;" href="#"> <i class="fas fa-history" style="color: #41a9d0;"></i> Orders History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" aria-current="page"  style="font-size: 25px;" (click)="onLogOut()"><p> <i class="fas fa-sign-out-alt" style="color: #41a9d0;"></i> Logout</p></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
