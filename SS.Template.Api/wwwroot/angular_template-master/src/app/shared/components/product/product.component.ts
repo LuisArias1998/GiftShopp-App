@@ -5,6 +5,7 @@ import { IProduct } from '../../../interface/IProduct';
 import { CartService } from '../../../services/cart.service';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
     selector:'app-component',
@@ -23,7 +24,8 @@ export class ProductComponent implements OnInit{
     productPrice:number;
     productDescription:string=""
     constructor(private _activatedRoute:ActivatedRoute, public _productService:ProductsService,
-        public _cartSvc:CartService, private _auth: AuthService, private _router:Router){
+        public _cartSvc:CartService, private _auth: AuthService, private _router:Router,
+        private _error:ErrorHandlerService){
         
     }
     ngOnInit(): void {
@@ -31,6 +33,7 @@ export class ProductComponent implements OnInit{
         this.id=+this._activatedRoute.snapshot.params.id;
         this._productService.getProductById(this.id).subscribe(()=>{
             try{
+                //setting the product info to avoid "undefined" errors
                 this.product=this._productService.singleProduct;
                 this.productName=this.product[0].productName;
                 this.productDescription=this.product[0].productDescription;
@@ -39,20 +42,24 @@ export class ProductComponent implements OnInit{
                 this.productPrice=this.product[0].unitPrice;
                 this.hasInfo=true;
             }catch(ex){
-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'This product doesnt exist',
+                    heightAuto:true,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(()=>{this._router.navigateByUrl('/');},1500);
             }
         }); 
         try{
             this._auth.getAuthInfo().subscribe(
               data => {
-                console.log(data);
+
                 this.isLogged=true;
     
               }, err => {
-              //this._error.handle(err);
-              // this._auth.getAuthInfo().subscribe(data => {
-              //     console.log(data);
-              //   });
+
             });
           }catch(ex){
           }

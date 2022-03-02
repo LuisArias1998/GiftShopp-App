@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IUser } from '../../../interface/IUser';
 import { AuthState, AuthService } from '../../../core/services/auth.service';
 import { AuthModel } from 'src/app/common/models/auth.model';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private _route: Router, private _auth: AuthService, 
-    private _authState: AuthState) {
+    private _authState: AuthState, private _error: ErrorHandlerService) {
 
   }
 
@@ -23,15 +24,15 @@ export class LoginComponent implements OnInit {
     Email: '',
     Password: ''
   };
-  err;   ngOnInit(): void {
+  ngOnInit(): void {
 
   }
 
   onLogin() {
-    console.log(this.creds);
+    //Subscribe with the login credentiasl
     this._auth.login(this.creds).subscribe(
     res => {
-      console.log(res);
+      //get the user info and set into the auth service and auth state
       const user: AuthModel = {
         id: res.user.id,
         email: res.user.email,
@@ -40,16 +41,17 @@ export class LoginComponent implements OnInit {
         expiresIn: 0
       };
       this._authState.set(user);
-      this._auth.isAuthenticated().subscribe(res => console.log(res));
+      this._auth.isAuthenticated().subscribe(res =>{});
       this._auth.getAuthInfo().subscribe(
         res => {
-          console.log(res);
           this._route.navigateByUrl('/');
         },
-        err => console.log(err)
+        err => {
+          this._error.handle(err);
+        }
       );
     }, err => {
-      alert('Err ' + err);
+      this._error.handle(err);
     });
   }
 }

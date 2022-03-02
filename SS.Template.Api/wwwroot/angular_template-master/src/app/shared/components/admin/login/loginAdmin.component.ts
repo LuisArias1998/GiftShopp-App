@@ -24,10 +24,8 @@ export class LoginAdminComponent implements OnInit{
         
     }
     onLogin() {
-        console.log(this.creds);
         this._auth.login(this.creds).subscribe(
         res => {
-          console.log(res);
           const user: AuthModel = {
             id: res.user.id,
             email: res.user.email,
@@ -37,13 +35,12 @@ export class LoginAdminComponent implements OnInit{
           };
           if(user.roles[0]=='Admin'){
             this._authState.set(user);
-            this._auth.isAuthenticated().subscribe(res => console.log(res));
+            this._auth.isAuthenticated().subscribe(res => {});
             this._auth.getAuthInfo().subscribe(
             res => {
-              console.log(res);
               this._route.navigateByUrl('/index');
             },
-            err => console.log(err)
+            err => {}
             );
           }else{
             Swal.fire({
@@ -58,6 +55,6 @@ export class LoginAdminComponent implements OnInit{
         }, err => {
           alert('Err ' + err);
         });
-      }
+  }
 
 }

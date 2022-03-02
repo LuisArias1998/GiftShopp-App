@@ -28,13 +28,10 @@ export class CartService {
 
   addToOrder(product: IProduct) {
     let item: IProduct;
-    console.log("Entro al order ",product);
-    console.log("El items: ",this.order.items)
+    //If the item already exists just increment the quantity
     item = this.order.items.find(o => o.id === product.id);
-
     if (item) {
         item.quantity++;
-        console.log("Entró al if");
     } else {
         let item :IProduct={};
         item.id = product.id;
@@ -52,27 +49,31 @@ export class CartService {
     return this.order
   }
   getOrders(){
-    console.log("in cart service")
     return this.http.get(`${this.URL}/api/order`).pipe(map(
     res=>{
       this.orders=res;
       return res;
     },
-    err=>
-      console.log(err)
+    err=>{
+
+    }
     ))
   }
 
   postOrder(order:Order){
     return this.http.post(`${this.URL}/api/order`,order).pipe(map(
       res=>{
-      console.log(res)
+
       },err=>{
-        console.log(err)
+
       }
       ));
   }
   postCustomer(customer:ICustomer){
     return this.http.post<ICustomer>(`${this.URL}/api/Customers`,customer).pipe(map(data=>{}));
+  }
+  getOrdersByOrderNumber(na:string){
+    var temp = this.orders.filter(o=>o.orderNumber.toLowerCase().includes(na.toLowerCase()));
+    return temp;
   }
 }

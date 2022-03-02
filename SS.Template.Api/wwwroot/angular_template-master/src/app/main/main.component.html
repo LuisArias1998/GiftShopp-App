@@ -1,45 +1,12 @@
-<!-- <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="['/']">{{ 'app.NAME' | translate }}</a>
-    <app-title class="navbar-text"></app-title>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <button class="btn btn-link nav-link" (click)="logOut()">
-        <i class="fas fa-sign-out-alt"></i>
-        {{ 'app.LOG_OUT' | translate }}</button>
-        </li>
-    </ul>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item" *ngFor="let item of navItems">
-                        <a class="nav-link" [routerLink]="item.route" [routerLinkActive]="['active']">
-              {{ item.name | translate }} <span class="sr-only">(current)</span>
-            </a>
-                    </li>
-                </ul>
-                <div class="version">
-                    <app-version></app-version>
-                </div>
-            </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <router-outlet></router-outlet>
-        </main>
-    </div>
-</div> -->
 <!----------NAVBAR----------->
 <div class="row">
     <div class="container-fluid">
         <app-navbar [(isLogged)]="isLogged"></app-navbar>
     </div>
 </div>
+<!--CLOSING NAVBAR-->
 
+<!--SIDEBAR-->
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block" style="background-color: white;">
@@ -61,11 +28,13 @@
                 </div>
             </div>
         </nav>
+<!-- CLOSING SIDEBAR-->
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <!--TITLE AND SEARCH BAR -->
             <h3>Home page</h3>
             <hr>
-            <div class="navbar-nav col-md-5 ">
+            <div class="navbar-nav col-md-8 ">
                 <form class="d-flex" (submit)="onSearchForProduct()">
                     <div class="form-group">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" #search="ngModel" [(ngModel)]="searchBar" />
@@ -73,18 +42,28 @@
                     <div class="form-group">
                         <button class="btn btn-outline-success ml-2" type="submit">Search</button>
                     </div>
+                    <div class="form-group">
+                        <div class="dropdown show col-md-2 ml-auto">
+                            <a class="btn dropdown-toggle btn-drop" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              Products to see
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <a class="dropdown-item drop-item" (click)="sortForQuantity(i+1)" *ngFor="let c of products;let i=index" href="#">{{i+1}}</a>
+                            </div>
+                          </div>
+                    </div>
                 </form>
                 <h3 class="mt-5 animate__animated animate__headShake" *ngIf="isProductsEmpty">Cannot find any product <i class="fas fa-sad-tear"></i>
                     <hr>
                 </h3>
             </div>
+            <!--CLOSING TITLE AND SEARCH BAR -->
+
+            <!--PRODUCT LIST-->
             <div class="row mb-5">
-                <div class="col-lg-3 d-flex align-items-stretch" *ngFor="let c of products">
-                    <div class="card mt-5 animate__animated animate__pulse" style="width: 18rem; border: none;">
-
+                <div class="col-lg-3 d-flex align-items-stretch" *ngFor="let c of products; let i=index">
+                    <div class="card mt-5 animate__animated animate__pulse" *ngIf="i<productsSize" style="width: 18rem; border: none;">
                         <img class="card-img-top card-img m-2" title="{{c.productName}}" src="{{c.productImg}}" style="object-fit: cover;" alt="{{c.productName}}">
-
-
                         <div class="card-block d-flex flex-column">
                             <h5 class="card-title text-title">{{c.productName}}</h5>
                             <p class="card-text text-justify text-description">{{c.productDescription}}</p>
@@ -94,6 +73,7 @@
                     </div>
                 </div>
             </div>
+            <!--CLOSING PRODUCT LIST-->
             <router-outlet></router-outlet>
         </main>
     </div>

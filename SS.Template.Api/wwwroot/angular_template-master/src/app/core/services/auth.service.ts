@@ -68,7 +68,7 @@ export class AuthService {
    */
   public getAuthInfo(): Observable<AuthModel> {
     if (this._state.isAuthenticated) {
-      console.log('Hola ' + this._state);
+      //console.log('Hola ' + this._state);
       return of(this._state.current);
     }
     return this.get();

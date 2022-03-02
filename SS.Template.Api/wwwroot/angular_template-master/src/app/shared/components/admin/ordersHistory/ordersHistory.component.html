@@ -4,24 +4,30 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="min-height: 80vh;">
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <h3 class="mt-5 animate__animated animate__fadeIn">Orders history</h3>
             <hr>
-            <div class="navbar-nav col-md-4 ">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" style="width: 500px;" aria-label="Search">
-                    <button class="btn btn-outline-success ml-2" type="submit">Search</button>
+            <div class="navbar-nav col-md-5 ">
+                <form class="d-flex" (submit)="onSearchForOrders()">
+                    <div class="form-group">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" aria-label="Search" name="search" #search="ngModel" [(ngModel)]="searchBar">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-outline-success ml-2" type="submit">Search</button>
+                    </div>
                 </form>
+                
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                     <table class="table mt-5">
                         <thead class="" style="background-color: #e4c7c9; color:rgb(99, 99, 99)">
                             <tr>
-                                <th class="col-2">#</th>
-                                <th class="col-3">Products</th>
+                                <th class="col-2">Order #</th>
+                                <th class="col-2">Date</th>
+                                <th class="col-2">Name</th>
                                 <th class="col-2">City</th>
                                 <th class="col-2">Email</th>
                                 <th class="col-2">Total</th>
@@ -29,8 +35,9 @@
                         </thead>
                         <tbody *ngFor="let o of orders">
                             <tr>
-                                <th class="col-2">{{o.id}}</th>
-                                <td class="col-3"></td>
+                                <th class="col-2">{{o.orderNumber}}</th>
+                                <td class="col-2">{{o.customer.dateCreated.substring(0,10)}}</td>
+                                <td class="col-2">{{o.customer.name}}</td>
                                 <td class="col-2">{{o.customer.city}}</td>
                                 <td class="col-2">{{o.customer.email}}</td>
                                 <td class="col-2">{{o.customer.orderTotal | currency}}</td>
@@ -40,6 +47,9 @@
                     </table>
                 </div>
             </div>
+            <h3 class="mt-5" *ngIf="isOrdersEmpty">Cannot find orders results <i class="fas fa-sad-tear"></i>
+                <hr>
+            </h3>
         </main>
     </div>
 </div>

@@ -25,7 +25,6 @@ export class AddProductComponent implements OnInit{
         
     }
     onAddProduct(){
-        console.log(this.product);
         this._addSvc.postProduct(this.product).subscribe(
             res=>{
                 Swal.fire({
@@ -42,7 +41,6 @@ export class AddProductComponent implements OnInit{
                     timer: 1500
                 })
             }
-        
         );
     }
 }

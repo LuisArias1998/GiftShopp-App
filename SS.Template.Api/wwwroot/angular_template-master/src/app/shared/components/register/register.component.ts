@@ -4,6 +4,7 @@ import { IUser } from '../../../interface/IUser';
 import { RegisterService } from '../../../services/register.service';
 import { ICustomer } from '../../../interface/ICustomer';
 import { Router } from '@angular/router';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
     selector:'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit{
         Email: "",
         Password: ""
       };
-    constructor(private _registerSvc:RegisterService, private route:Router){
+    constructor(private _registerSvc:RegisterService, private route:Router,
+        private _error: ErrorHandlerService){
 
     }
 
@@ -32,29 +34,13 @@ export class RegisterComponent implements OnInit{
         
     }
     onSignUp(){
-        let customer:ICustomer={
-            name:this.creds.FirstName+" "+this.creds.LastName,
-            city:'',
-            orderTotal:0,
-            status:1,
-            dateCreated:new Date(),
-            dateUpdated:new Date(),
-            email:this.creds.Email
-        }
         this._registerSvc.postRegister(this.creds).subscribe(
             res=>{
                 this.route.navigateByUrl("/login");
-                // this._registerSvc.postCustomer(customer).subscribe(res=>{
-                //     this.route.navigateByUrl("/login");
-                // },err=>{})
+                
             },
             err=>{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error in your registration',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                this._error.handle(err);
             });
     }
 

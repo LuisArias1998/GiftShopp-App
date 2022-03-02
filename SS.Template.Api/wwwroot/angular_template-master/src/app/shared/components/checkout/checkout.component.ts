@@ -35,15 +35,10 @@ export class CheckoutComponent implements OnInit{
     }
     onCheckout(){
         if(this.isLogged){
-            console.log("in checkout component")
-
                try{
                 this._auth.getAuthInfo().subscribe(
                   data => {
-                    console.log(data);
                     this.isLogged=true;
-                    // this.oneCustomer = this.customers.find(c=>c.email.includes(data.email));
-                    // console.log(this.oneCustomer)
                         let order=this._cartSvc.getOrder();
                         let newCustomer:ICustomer={
                             name:this.creds.FirstName+" "+this.creds.LastName,
@@ -56,7 +51,6 @@ export class CheckoutComponent implements OnInit{
                         }
                         order.customer=newCustomer;
                         order.items.forEach(c => c.id=null);
-                        console.log("Se imprimió la order: ",order.customer);
                         this._cartSvc.postOrder(order).subscribe(
                             res=>{
                                 Swal.fire({
@@ -65,13 +59,10 @@ export class CheckoutComponent implements OnInit{
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-                            },err=>{console.log("Salió mal")})
+                            },err=>{})
                     
                   }, err => {
-                  //this._error.handle(err);
-                  // this._auth.getAuthInfo().subscribe(data => {
-                  //     console.log(data);
-                  //   });
+
                 });
               }catch(ex){
               }

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import $ from 'jquery'
 import { ProductsService } from '../../../services/products.service';
 import { CartService } from '../../../services/cart.service';
 import { IProduct } from '../../../interface/IProduct';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-cart',
@@ -29,7 +27,9 @@ export class CartComponent implements OnInit{
     };
     constructor(private _productSvc:ProductsService, private _cartSvc:CartService,
         private _auth: AuthService, private _router:Router){
-        this.cartProducts=this._cartSvc.order.items;
+        try{
+            this.cartProducts=this._cartSvc.order.items;
+        }catch(ex){}
     }
     ngOnInit(): void {
         this.subtotal = this._cartSvc.order.subtotal;
@@ -38,14 +38,10 @@ export class CartComponent implements OnInit{
         try{
             this._auth.getAuthInfo().subscribe(
               data => {
-                console.log(data);
                 this.isLogged=true;
     
               }, err => {
-              //this._error.handle(err);
-              // this._auth.getAuthInfo().subscribe(data => {
-              //     console.log(data);
-              //   });
+              
             });
           }catch(ex){
           }
@@ -65,8 +61,5 @@ export class CartComponent implements OnInit{
             this._cartSvc.total=this.total;
         }
         this.clickCountExpress++;
-    }
-    onCheckout(){
-        
     }
 }

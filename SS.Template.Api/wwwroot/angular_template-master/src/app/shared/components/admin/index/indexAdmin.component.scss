@@ -125,3 +125,12 @@
     overflow: hidden !important;
     text-overflow: ellipsis;
 }
+.btn-drop{
+    border-radius: 20px; 
+    background-color: #41a9d0; 
+
+    color: white;
+}
+.drop-item:focus{
+    background: #41a9d0;
+}

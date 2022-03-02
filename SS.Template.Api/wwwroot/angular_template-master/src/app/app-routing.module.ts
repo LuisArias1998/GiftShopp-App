@@ -20,27 +20,12 @@ import { AuthAdminGuard } from './core/guards/admin/auth-admin.guard';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    component: LayoutComponent,
-    loadChildren: './auth/auth.module#AuthModule'
-  },
-  {
     path: '',
     component: MainComponent,
     
     data: {
       title: 'app.HOME'
-    },
-    children: [
-      {
-        path: 'examples',
-        component: LayoutComponent,
-        loadChildren: './examples/examples.module#ExamplesModule',
-        data: {
-          title: 'examples.$TITLE'
-        }
-      },
-    ]
+    }
   },
   {
     path: 'error',

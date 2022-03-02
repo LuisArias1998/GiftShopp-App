@@ -11,7 +11,6 @@ export class AddProductService {
   constructor(private http:HttpClient) {}
 
   public postProduct(model:IProduct){
-    console.log(model);
     return this.http.post<IProduct>(`${this.URL}/api/products`,model)
       .pipe(map(data=>{}));
   }

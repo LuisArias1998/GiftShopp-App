@@ -15,6 +15,7 @@ export class IndexAdminComponent implements OnInit{
     products:IProduct[]
     searchBar:string;
     isProductsEmpty:boolean=true;
+    productsSize:number;
     constructor(private _productSvc:ProductsService, private _deleteSvc:DeleteProductService,
       private _auth: AuthService, private _authState: AuthState){
       if(this.products){
@@ -27,6 +28,7 @@ export class IndexAdminComponent implements OnInit{
       this._productSvc.loadProducts().subscribe(()=>{
         try{
           this.products=this._productSvc.products;
+          this.productsSize=this.products.length;
           this.setCategoriesList();
           if(this.products.length===0){
             this.isProductsEmpty=true;
@@ -41,14 +43,9 @@ export class IndexAdminComponent implements OnInit{
       try{
         this._auth.getAuthInfo().subscribe(
           data => {
-            console.log(data);
             //this.isLogged=true;
-
           }, err => {
-          //this._error.handle(err);
-          // this._auth.getAuthInfo().subscribe(data => {
-          //     console.log(data);
-          //   });
+
         });
       }catch(ex){
       }
@@ -63,13 +60,18 @@ export class IndexAdminComponent implements OnInit{
         this.categoriesList=dataArr;
     }
     filterByCategory(e:any){
+      //Getting the current cattegory from the event and filtering
         let category:string = e.target.text.replace("(current)","")
         category = category.substring(1,category.length-1)
     
         this.products = this._productSvc.getProductsByCategory(category);
+        
     }
     listAll(){
-        this.products=this._productSvc.getProducts();
+        try{
+          this.products=this._productSvc.getProducts();
+          this.productsSize=this.products.length;
+        }catch(ex){}
         if(this.products)
           this.isProductsEmpty=false;
         else
@@ -78,6 +80,7 @@ export class IndexAdminComponent implements OnInit{
     onSearchForProduct(){
       try{
         this.products=this._productSvc.getProductsByName(this.searchBar);
+        this.productsSize=this.products.length;
         if(this.products.length===0)
           this.isProductsEmpty=true;
         else
@@ -117,6 +120,9 @@ export class IndexAdminComponent implements OnInit{
             }
           })
         
+    }
+    sortForQuantity(index:number){
+      this.productsSize=index;
     }
       
 }

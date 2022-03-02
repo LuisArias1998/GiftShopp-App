@@ -28,7 +28,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="unitPrice">Unit price</label>
-                            <input type="number" class="form-control " name="unitPrice" #unitPrice="ngModel" [(ngModel)]="product.unitPrice" required />
+                            <input type="number" class="form-control " min="1" name="unitPrice" #unitPrice="ngModel" [(ngModel)]="product.unitPrice" required />
                             <span *ngIf="unitPrice.touched && unitPrice.invalid && unitPrice.errors.required" class="text-danger">Required</span>
                         </div>
                     </div>
@@ -54,6 +54,7 @@
                 </div>
             </form>
         </div>
+        <!--CART TEST-->
         <div class="col-md-2 mr-auto mt-5">
             <div class="card mt-5" style="width: 18rem; border: none;">
                 <img class="card-img-top card-img m-2" *ngIf="product.productImg" src="{{product.productImg}}" style="object-fit: cover; border-radius: 20px;" alt="Card image cap">
@@ -61,7 +62,6 @@
                     <h5 class="card-title" *ngIf="product.productName">{{product.productName}}</h5>
                     <p class="card-text text-justify" *ngIf="product.productDescription">{{product.productDescription}}</p>
                     <small class="ml-2" style="color: #41a9d0;" *ngIf="product.unitPrice"><strong>{{product.unitPrice | currency}}</strong></small>
-
                 </div>
             </div>
         </div>

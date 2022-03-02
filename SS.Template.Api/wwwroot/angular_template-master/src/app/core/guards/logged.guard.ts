@@ -20,10 +20,8 @@ export class LoggedGuard implements CanActivate {
          map(info => {
            
            if (info == null) {
-             let userRoles = info.roles || [];
              return true;
            }
-           
            return false;
          }),
          catchError((error: HttpErrorResponse) => {
