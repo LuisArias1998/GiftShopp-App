@@ -14,7 +14,5 @@ export class RegisterService {
   postRegister(user:IUser){
     return this.http.post<IUser>(`${this.URL}/api/account/sign-up`,user).pipe(map(data=>{}));
   }
-  postCustomer(customer:ICustomer){
-    return this.http.post<IUser>(`${this.URL}/api/Customers`,customer).pipe(map(data=>{}));
-  }
+  
 }

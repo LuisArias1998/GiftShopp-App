@@ -125,7 +125,7 @@ namespace SS.Template.Persistence
         }
         public IEnumerable<Order> GetAllOrders()
         {
-            return this.Orders.Where(o=>o.Id>7).Include(o=>o.Customer).Include(o=>o.Items).ToList();
+            return this.Orders.Include(o=>o.Customer).Include(o=>o.Items).ToList();
         }
         public void Post(Product model)
         {

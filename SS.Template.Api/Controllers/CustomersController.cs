@@ -1,11 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SS.Template.Application.Customers;
 using SS.Template.Application.Queries;
 using SS.Template.Domain.Entities;
+using SS.Template.Persistence;
 
 namespace SS.Template.Api.Controllers
 {
@@ -15,19 +18,33 @@ namespace SS.Template.Api.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ICustomersService _customersService;
+        private readonly DutchRepository _repository;
+        private readonly ILogger<CustomersController> _logger;
+        private readonly IMapper _mapper;
 
-        public CustomersController(ICustomersService customersService)
+        public CustomersController(ICustomersService customersService,
+            DutchRepository repository, ILogger<CustomersController> logger,
+            IMapper mapper)
         {
             _customersService = customersService;
+            this._repository = repository;
+            this._logger = logger;
+            this._mapper = mapper;
         }
 
         // GET: api/Customers
         [HttpGet]
-        [ProducesResponseType(typeof(PaginatedResult<CustomerModel>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get([FromQuery] PaginatedQuery query)
+        public IActionResult Get()
         {
-            var page = await _customersService.GetPage(query);
-            return Ok(page);
+            try
+            {
+                return Ok(this._repository.GetAllOrders());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Bad request found");
+                return null;
+            }
         }
 
         // GET: api/Customers/5

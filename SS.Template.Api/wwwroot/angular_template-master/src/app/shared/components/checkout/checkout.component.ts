@@ -44,7 +44,6 @@ export class CheckoutComponent implements OnInit{
                     this.isLogged=true;
                     // this.oneCustomer = this.customers.find(c=>c.email.includes(data.email));
                     // console.log(this.oneCustomer)
-                        
                         let order=this._cartSvc.getOrder();
                         let newCustomer:ICustomer={
                             name:this.creds.FirstName+" "+this.creds.LastName,
@@ -56,10 +55,16 @@ export class CheckoutComponent implements OnInit{
                             email:data.email
                         }
                         order.customer=newCustomer;
-                        console.log("SE imprimió la order: ",order.customer);
+                        order.items.forEach(c => c.id=null);
+                        console.log("Se imprimió la order: ",order.customer);
                         this._cartSvc.postOrder(order).subscribe(
                             res=>{
-                            console.log("Salió bien ",res);
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Purchase completed',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
                             },err=>{console.log("Salió mal")})
                     
                   }, err => {

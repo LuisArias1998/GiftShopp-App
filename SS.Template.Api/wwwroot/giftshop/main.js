@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-------------NAVBAR-------------->\r\n<div class=\"row\">\r\n    <div class=\"container-fluid\">\r\n        <app-navbar [(isLogged)]=\"isLogged\"></app-navbar>\r\n    </div>\r\n</div>\r\n<!---------------TABLE-------------->\r\n<div class=\"container-fluid mb-5 mt-5\">\r\n    <div class=\"row justify-content-center m-0 animate__animated animate__fadeIn\">\r\n        <h3 class=\"mt-5\">Cart products</h3>\r\n    </div>\r\n    <hr>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-8 mr-auto ml-auto\">\r\n            <table class=\"table mt-5\">\r\n                <thead class=\"\" style=\"background-color: #d041c1; color:white\">\r\n                    <tr>\r\n                        <th class=\"col-3\"></th>\r\n                        <th class=\"col-3\">Product</th>\r\n                        <th class=\"col-2\">Price</th>\r\n                        <th class=\"col-2\">Quantity</th>\r\n                        <th class=\"col-2\">Subtotal</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let c of cartProducts\">\r\n                        <th class=\"col-3\"><img src=\"{{c.productImg}}\" alt=\"{{c.productName}}\" height=\"50\" width=\"50\"></th>\r\n                        <td class=\"col-3\">{{c.productName}}</td>\r\n                        <td class=\"col-2\">{{c.unitPrice | currency}}</td>\r\n                        <td class=\"col-2\">{{c.quantity}}</td>\r\n                        <td>{{c.quantity * c.unitPrice | currency}} </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n    <!---------------TOTAL CARD------------------>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4 ml-auto\">\r\n            <div class=\"card mt-5\">\r\n                <div class=\"card-header text-center header-style\">\r\n                    <strong>Total</strong>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <ul class=\"list-group list-group-flush\">\r\n                        <li class=\"list-group-item\"><strong>Subtotal:</strong> {{subtotal | currency}}</li>\r\n                        <li class=\"list-group-item\"><strong>Shipment:</strong>\r\n                            <div class=\"form-check\">\r\n                                <input class=\"form-check-input\" (click)=\"onStandard()\" type=\"radio\" name=\"flexRadioDefault\" id=\"flexRadioDefault1\">\r\n                                <label class=\"form-check-label\" for=\"flexRadioDefault1\">\r\n                                  Standard shipment (2-4 days): {{4.99 | currency}}\r\n                                </label>\r\n                            </div>\r\n                            <div class=\"form-check\">\r\n                                <input class=\"form-check-input\" (click)=\"onExpress()\" type=\"radio\" name=\"flexRadioDefault\" id=\"flexRadioDefault2\" checked>\r\n                                <label class=\"form-check-label\" for=\"flexRadioDefault2\">\r\n                                    Express shipment (1-2 days) {{6.99 | currency}}\r\n                                </label>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\"><strong>Shipment:</strong>\r\n                            <strong>Total:</strong>{{total | currency}}\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!------------------CHECKOUT CARD---------------->\r\n        <div class=\"col-md-4 mr-auto\">\r\n            <app-checkout [(isLogged)]=\"isLogged\" *ngIf=\"this.cartProducts.length>0\"></app-checkout>\r\n            <h3 class=\"mt-5 text-center\" style=\"color: #d041c1;\" *ngIf=\"this.cartProducts.length===0\">Add something to your cart</h3>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!-----------------FOOTER------------>\r\n<app-footer></app-footer>");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-------------NAVBAR-------------->\r\n<div class=\"row\">\r\n    <div class=\"container-fluid\">\r\n        <app-navbar [(isLogged)]=\"isLogged\"></app-navbar>\r\n    </div>\r\n</div>\r\n<!---------------TABLE-------------->\r\n<div class=\"container-fluid mb-5 mt-5\">\r\n    <div class=\"row justify-content-center m-0 animate__animated animate__fadeIn\">\r\n        <h3 class=\"mt-5\">Cart products</h3>\r\n    </div>\r\n    <hr>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-8 mr-auto ml-auto\">\r\n            <table class=\"table mt-5\">\r\n                <thead class=\"\" style=\"background-color: #d041c1; color:white\">\r\n                    <tr>\r\n                        <th class=\"col-3\"></th>\r\n                        <th class=\"col-3\">Product</th>\r\n                        <th class=\"col-2\">Price</th>\r\n                        <th class=\"col-2\">Quantity</th>\r\n                        <th class=\"col-2\">Subtotal</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let c of cartProducts\">\r\n                        <th class=\"col-3\"><img src=\"{{c.product.productImg}}\" alt=\"{{c.product.productName}}\" height=\"50\" width=\"50\"></th>\r\n                        <td class=\"col-3\">{{c.product.productName}}</td>\r\n                        <td class=\"col-2\">{{c.unitPrice | currency}}</td>\r\n                        <td class=\"col-2\">{{c.quantity}}</td>\r\n                        <td>{{c.quantity * c.unitPrice | currency}} </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n    <!---------------TOTAL CARD------------------>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4 ml-auto\">\r\n            <div class=\"card mt-5\">\r\n                <div class=\"card-header text-center header-style\">\r\n                    <strong>Total</strong>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <ul class=\"list-group list-group-flush\">\r\n                        <li class=\"list-group-item\"><strong>Subtotal:</strong> {{subtotal | currency}}</li>\r\n                        <li class=\"list-group-item\"><strong>Shipment:</strong>\r\n                            <div class=\"form-check\">\r\n                                <input class=\"form-check-input\" (click)=\"onStandard()\" type=\"radio\" name=\"flexRadioDefault\" id=\"flexRadioDefault1\">\r\n                                <label class=\"form-check-label\" for=\"flexRadioDefault1\">\r\n                                  Standard shipment (2-4 days): {{4.99 | currency}}\r\n                                </label>\r\n                            </div>\r\n                            <div class=\"form-check\">\r\n                                <input class=\"form-check-input\" (click)=\"onExpress()\" type=\"radio\" name=\"flexRadioDefault\" id=\"flexRadioDefault2\" checked>\r\n                                <label class=\"form-check-label\" for=\"flexRadioDefault2\">\r\n                                    Express shipment (1-2 days) {{6.99 | currency}}\r\n                                </label>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\"><strong>Shipment:</strong>\r\n                            <strong>Total:</strong>{{total | currency}}\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!------------------CHECKOUT CARD---------------->\r\n        <div class=\"col-md-4 mr-auto\">\r\n            <app-checkout [(isLogged)]=\"isLogged\" *ngIf=\"this.cartProducts.length>0\"></app-checkout>\r\n            <h3 class=\"mt-5 text-center\" style=\"color: #d041c1;\" *ngIf=\"this.cartProducts.length===0\">Add something to your cart</h3>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!-----------------FOOTER------------>\r\n<app-footer></app-footer>");
 
 /***/ }),
 
@@ -2699,21 +2699,28 @@ var CartService = /** @class */ (function () {
     }
     CartService.prototype.addToOrder = function (product) {
         var item;
-        console.log("Entro al order");
-        item = this.order.items.find(function (o) { return o.id === product.id; });
+        //console.log("Entro al order");
+        item = this.order.items.find(function (o) { return o.product.id === product.id; });
         if (item) {
             item.quantity++;
-            console.log("Entró al if");
+            //console.log("Entró al if");
         }
         else {
-            var item_1 = {};
-            //item.id = product.id;
-            item_1.productName = product.productName;
-            item_1.productDescription = product.productDescription;
-            item_1.productImg = product.productImg;
-            item_1.category = product.category;
-            item_1.unitPrice = product.unitPrice;
-            item_1.quantity = 1;
+            var prod = {
+                category: product.category,
+                productName: product.productName,
+                quantity: 0,
+                unitPrice: 0,
+                productDescription: product.productDescription,
+                productImg: product.productImg
+            };
+            var item_1 = {
+                product: prod,
+                unitPrice: product.unitPrice,
+                quantity: 1
+            };
+            console.log(item_1);
+            console.log("Antes del push");
             this.order.items.push(item_1);
         }
     };
@@ -2846,9 +2853,6 @@ var RegisterService = /** @class */ (function () {
     }
     RegisterService.prototype.postRegister = function (user) {
         return this.http.post(this.URL + "/api/account/sign-up", user).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { }));
-    };
-    RegisterService.prototype.postCustomer = function (customer) {
-        return this.http.post(this.URL + "/api/Customers", customer).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { }));
     };
     RegisterService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

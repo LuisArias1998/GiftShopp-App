@@ -1,4 +1,5 @@
 import { ICustomer } from '../interface/ICustomer';
+import { IOrderItem } from '../interface/IOrderItem';
 import { IProduct } from '../interface/IProduct';
 export class Order{
 

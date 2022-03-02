@@ -4,6 +4,7 @@ import { IProduct } from '../interface/IProduct';
 import { Order } from '../shared/Order';
 import { map } from 'rxjs/operators';
 import { ICustomer } from '../interface/ICustomer';
+import { IOrderItem } from '../interface/IOrderItem';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class CartService {
   public products:IProduct[]=[];
   public order:Order = new Order();
   public total:number;
+
+  public orders;
 
   URL:string = 'https://localhost:44383';
 
@@ -25,7 +28,8 @@ export class CartService {
 
   addToOrder(product: IProduct) {
     let item: IProduct;
-    console.log("Entro al order");
+    console.log("Entro al order ",product);
+    console.log("El items: ",this.order.items)
     item = this.order.items.find(o => o.id === product.id);
 
     if (item) {
@@ -33,7 +37,7 @@ export class CartService {
         console.log("Entró al if");
     } else {
         let item :IProduct={};
-        //item.id = product.id;
+        item.id = product.id;
         item.productName = product.productName;
         item.productDescription = product.productDescription;
         item.productImg = product.productImg;
@@ -47,11 +51,11 @@ export class CartService {
   getOrder():Order{
     return this.order
   }
-  getCustomers(){
+  getOrders(){
     console.log("in cart service")
-    return this.http.get(`${this.URL}/api/customers`).pipe(map(
+    return this.http.get(`${this.URL}/api/order`).pipe(map(
     res=>{
-      console.log(res)
+      this.orders=res;
       return res;
     },
     err=>
